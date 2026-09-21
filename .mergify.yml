@@ -1,0 +1,19 @@
+merge_queue:
+  max_parallel_checks: 3
+
+queue_rules:
+  - name: default
+    batch_size: 1
+    queue_conditions:
+      - base=main
+    merge_conditions:
+      - check-success=required-ci
+      - label=ship-it          # only a user with write access can add a label
+
+pull_request_rules:
+  - name: queue
+    conditions:
+      - base=main
+    actions:
+      queue:
+        name: default
