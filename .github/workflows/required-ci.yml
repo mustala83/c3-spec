@@ -1,0 +1,11 @@
+name: required-ci
+on: [push, pull_request]
+jobs:
+  required-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
+      - name: policy check
+        run: bash ci/check.sh
